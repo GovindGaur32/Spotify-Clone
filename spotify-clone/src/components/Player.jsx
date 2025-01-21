@@ -1,10 +1,21 @@
-import  { useContext } from 'react'
+import  { useContext, useState} from 'react'
 import { assets } from '../assets/assets'
 import { PlayerContext } from '../context/PlayerContext'
 
-const Player = () => {
+const Player = (props) => {
 
-    const {track,seekBar,seekBg,playStatus,play,pause,time,previous,next,seekSong} = useContext(PlayerContext);
+  const { track, seekBar, seekBg, playStatus, play, pause, time, previous, next, seekSong } = useContext(PlayerContext);
+  // const [isMuted, setIsMuted] = useState(false);
+ 
+  let vol = document.getElementById('vol')
+  let num = document.getElementById('num');
+  // var mute2 = document.getElementById('mute');
+  const volume = () => {
+    props.ad.volume = vol.value / 100;
+    num.innerHTML = vol.value;
+  }
+  
+  
 
   return track ? (
     <div className='h-[10%] bg-black flex justify-between items-center text-white px-4'>
@@ -39,10 +50,8 @@ const Player = () => {
         <img className='w-4' src={assets.mic_icon} alt="" />
         <img className='w-4' src={assets.queue_icon} alt="" />
         <img className='w-4' src={assets.speaker_icon} alt="" />
-        <img className='w-4' src={assets.volume_icon} alt="" />
-        <div className='w-20 bg-slate-50 h-1 rounded'>
-
-        </div>
+        <img  className='w-4 cursor-pointer' src={ assets.volume_icon} alt="" id='mute' />
+        <input type="range" name="volume" id="vol" onChange={volume} ></input><span id="num"></span>
         <img className='w-4' src={assets.mini_player_icon} alt="" />
         <img className='w-4' src={assets.zoom_icon} alt="" />
       </div>

@@ -7,7 +7,7 @@ import { PlayerContext } from './context/PlayerContext'
 const App = () => {
 
   const { audioRef, track, songsData } = useContext(PlayerContext);
-
+  const audio=document.getElementById('aud')
   return (
     <div className='h-screen bg-black'>
       {
@@ -17,12 +17,12 @@ const App = () => {
               <Sidebar />
               <Display />
             </div>
-            <Player />
+            <Player ad={audio} />
           </>
           : ""
       }
 
-      <audio ref={audioRef} src={track?track.file:""} preload='auto'></audio>
+      <audio ref={audioRef} src={track?track.file:""} preload='auto' id='aud'></audio>
     </div>
   )
 }
